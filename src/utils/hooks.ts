@@ -15,10 +15,7 @@ function useSocketListener<T extends object>(
     socket?.addEventListener("close", () => setIsVisible(false));
 
     socket?.addEventListener("message", (message) => {
-      console.log(message);
-
       const data = JSON.parse(message.data);
-      console.log(data);
 
       if (data.block !== blockId) {
         return;
