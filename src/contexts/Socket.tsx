@@ -16,7 +16,11 @@ const Socket: FC<{ children: ReactNode }> = ({ children }) => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => setSocket(new WebSocket("wss://taxivoshod.ru:8999")), []);
+  function createSocket() {
+    setSocket(new WebSocket("wss://taxivoshod.ru:8999"));
+  }
+
+  useEffect(() => createSocket(), []);
 
   useEffect(() => {
     if (!socket) {
@@ -24,19 +28,22 @@ const Socket: FC<{ children: ReactNode }> = ({ children }) => {
     }
 
     socket.addEventListener("open", (event) => {
-      console.log("opened", event);
+      console.log("Socket opened", event);
 
       setIsOpen(true);
     });
 
     socket.addEventListener("close", (event) => {
-      console.log("closed", event);
+      console.log("Socket closed", event);
 
       setIsOpen(false);
     });
 
     socket.addEventListener("error", (event) => {
-      console.log("error", event);
+      console.log("Error", event);
+
+      socket.close(1);
+      setTimeout(() => createSocket(), 5 * 1000);
     });
   }, [socket]);
 

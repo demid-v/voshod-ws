@@ -64,7 +64,6 @@ const Field: FC<{
         }
         onChange={({ target }) => setValue(target.value)}
       />
-      {isReadOnly && <label htmlFor="">readonly</label>}
       <br />
     </>
   );
