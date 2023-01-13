@@ -56,10 +56,16 @@ const BlocksSection = () => {
   }, []);
 
   useEffect(() => {
+    socket?.addEventListener("open", (event) => {
+      console.log(event);
+
+      setError(null);
+    });
+
     socket?.addEventListener("error", (event) => {
       console.log(event);
 
-      setError("Error");
+      setError("Error " + event);
     });
   }, [socket]);
 
