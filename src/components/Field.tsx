@@ -13,10 +13,7 @@ const Field: FC<{
 
   useEffect(() => {
     socket?.addEventListener("message", (message) => {
-      console.log("message", message);
-
       const data = JSON.parse(message.data);
-      console.log(data);
 
       if (data.focus || data.blur) {
         if (data.focus === inputName) {

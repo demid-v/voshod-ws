@@ -23,27 +23,27 @@ const Socket: FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => createSocket(), []);
 
   useEffect(() => {
-    if (!socket) {
-      return;
-    }
-
-    socket.addEventListener("open", (event) => {
+    socket?.addEventListener("open", (event) => {
       console.log("Socket opened", event);
 
       setIsOpen(true);
     });
 
-    socket.addEventListener("close", (event) => {
+    socket?.addEventListener("close", (event) => {
       console.log("Socket closed", event);
 
       setIsOpen(false);
     });
 
-    socket.addEventListener("error", (event) => {
+    socket?.addEventListener("error", (event) => {
       console.log("Error", event);
 
       socket.close(1);
       setTimeout(() => createSocket(), 5 * 1000);
+    });
+
+    socket?.addEventListener("message", (message) => {
+      console.log(message);
     });
   }, [socket]);
 

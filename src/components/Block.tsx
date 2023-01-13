@@ -10,14 +10,14 @@ const Block: FC<{ block: BlockType; isVisible: boolean }> = ({
   const { socket, isOpen } = useSocket();
 
   useEffect(() => {
-    if (!socket || !isOpen) {
+    if (!isOpen) {
       return;
     }
 
     if (isVisible) {
-      socket.send(JSON.stringify({ command: "subscribe", block: blockId }));
+      socket?.send(JSON.stringify({ command: "subscribe", block: blockId }));
     } else {
-      socket.send(JSON.stringify({ command: "unsubscribe", block: blockId }));
+      socket?.send(JSON.stringify({ command: "unsubscribe", block: blockId }));
     }
   }, [socket, isOpen, isVisible, blockId]);
 
