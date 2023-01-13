@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { Block } from "../../utils/types";
+import type { Block } from "../utils/types";
 import { useSocket } from "../contexts/Socket";
 import BlockWithButton from "./BlockWithButton";
 

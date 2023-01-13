@@ -1,9 +1,9 @@
 import { type FC, useEffect } from "react";
-import { Block } from "../../utils/types";
+import type { Block as BlockType } from "../utils/types";
 import { useSocket } from "../contexts/Socket";
 import Field from "./Field";
 
-const Block: FC<{ block: Block; isVisible: boolean }> = ({
+const Block: FC<{ block: BlockType; isVisible: boolean }> = ({
   block: { blockId, blockName, fields },
   isVisible,
 }) => {

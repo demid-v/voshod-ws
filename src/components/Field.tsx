@@ -1,10 +1,10 @@
 import { type FC, useEffect, useState } from "react";
-import { Field } from "../../utils/types";
+import type { Field as FieldType } from "../utils/types";
 import { useSocket } from "../contexts/Socket";
 
 const Field: FC<{
   blockId: string;
-  field: Field;
+  field: FieldType;
 }> = ({ blockId, field: { inputName, name, placeholder } }) => {
   const { socket } = useSocket();
 

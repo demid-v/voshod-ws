@@ -1,5 +1,5 @@
 import Head from "next/head";
-import BlocksSection from "./components/BlocksSection";
+import BlocksSection from "../components/BlocksSection";
 
 function Home() {
   return (
