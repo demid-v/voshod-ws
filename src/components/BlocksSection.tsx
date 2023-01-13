@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import type { Block } from "../utils/types";
 import { useSocket } from "../contexts/Socket";
-import BlockWithButton from "./BlockWithButton";
+import Block1 from "./Block1";
+import Block2 from "./Block2";
+import Block3 from "./Block3";
 
 const BlocksSection = () => {
   const { socket } = useSocket();
@@ -10,46 +11,6 @@ const BlocksSection = () => {
   const [buttonsElement, setButtonsElement] = useState<Element | null>(null);
 
   const [error, setError] = useState<string | null>(null);
-
-  const blocks: Block[] = [
-    {
-      blockId: "block1",
-      blockName: "Block 1",
-      fields: [
-        { inputName: "fname", name: "Имя", placeholder: "Введите имя" },
-        {
-          inputName: "lname",
-          name: "Фамилия",
-          placeholder: "Введите фамилию",
-        },
-      ],
-    },
-    {
-      blockId: "block2",
-      blockName: "Block 2",
-      fields: [
-        {
-          inputName: "birthday",
-          name: "День рождения",
-          placeholder: "Введите день рождения",
-        },
-        { inputName: "height", name: "Рост", placeholder: "Введите рост" },
-      ],
-    },
-    {
-      blockId: "block3",
-      blockName: "Block 3",
-      fields: [
-        { inputName: "city", name: "Город", placeholder: "Введите город" },
-        { inputName: "address", name: "Улица", placeholder: "Введите улицу" },
-        {
-          inputName: "index",
-          name: "Почтовый индекс",
-          placeholder: "Введите почтовый индекс",
-        },
-      ],
-    },
-  ];
 
   useEffect(() => {
     setButtonsElement(buttonsRef.current);
@@ -74,13 +35,9 @@ const BlocksSection = () => {
       {error && <div>{error}</div>}
       <div ref={buttonsRef}></div>
       <div>
-        {blocks.map((block) => (
-          <BlockWithButton
-            key={block.blockId}
-            buttonsElement={buttonsElement}
-            block={block}
-          />
-        ))}
+        <Block1 buttonsElement={buttonsElement} />
+        <Block2 buttonsElement={buttonsElement} />
+        <Block3 buttonsElement={buttonsElement} />
       </div>
     </section>
   );
