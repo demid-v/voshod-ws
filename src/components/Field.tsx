@@ -37,6 +37,7 @@ const Field: FC<{
   return (
     <>
       <label htmlFor={inputName}>{name}</label>
+      <br />
       <input
         type="text"
         name={inputName}

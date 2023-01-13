@@ -22,7 +22,7 @@ const Block: FC<{ block: BlockType; isVisible: boolean }> = ({
   }, [socket, isOpen, isVisible, blockId]);
 
   return (
-    <div className={isVisible ? "" : "hidden"}>
+    <div style={{ display: isVisible ? "block" : "none" }}>
       <h2>{blockName}</h2>
       <form action="" method="post">
         {fields.map((field) => (
