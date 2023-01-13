@@ -31,9 +31,9 @@ const BlocksSection = () => {
   }, [socket]);
 
   return (
-    <section>
+    <section className="blocks">
       {error && <div>{error}</div>}
-      <div ref={buttonsRef}></div>
+      <div ref={buttonsRef} className="buttons"></div>
       <div>
         <Block1 buttonsElement={buttonsElement} />
         <Block2 buttonsElement={buttonsElement} />

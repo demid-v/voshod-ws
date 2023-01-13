@@ -1,5 +1,5 @@
 import Head from "next/head";
-import BlocksSection from "../components/BlocksSection";
+import Blocks from "../components/Blocks";
 
 function Home() {
   return (
@@ -11,7 +11,7 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <BlocksSection />
+        <Blocks />
       </main>
     </>
   );

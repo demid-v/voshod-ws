@@ -3,6 +3,10 @@ import { createPortal } from "react-dom";
 import { useSocket } from "../contexts/Socket";
 import { useSocketListener } from "../utils/hooks";
 import Button from "./Button";
+import { Ubuntu } from "@next/font/google";
+
+const ubuntuNormal = Ubuntu({ subsets: ["cyrillic-ext"], weight: "400" });
+const ubuntu = Ubuntu({ subsets: ["cyrillic-ext"], weight: "500" });
 
 const Block1: FC<{
   buttonsElement: Element | null;
@@ -26,35 +30,40 @@ const Block1: FC<{
     <>
       {buttonsElement &&
         createPortal(
-          <Button buttonName="Block 2" setIsBlockVisible={setIsVisible} />,
+          <Button
+            buttonName="Блок 2"
+            isBlockVisible={isVisible}
+            setIsBlockVisible={setIsVisible}
+          />,
           buttonsElement
         )}
-      <div style={{ display: isVisible ? "block" : "none" }}>
-        <h2>Block 2</h2>
-        <form
-          action=""
-          method="post"
-          onFocus={({ target }) =>
-            socket?.send(
-              JSON.stringify({
-                command: "focus",
-                block: blockId,
-                field: target.name,
-              })
-            )
-          }
-          onBlur={({ target }) =>
-            socket?.send(
-              JSON.stringify({
-                command: "blur",
-                block: blockId,
-                field: target.name,
-              })
-            )
-          }
-        >
+      <form
+        action=""
+        method="post"
+        style={{ display: isVisible ? "block" : "none" }}
+        className={ubuntu.className}
+        onFocus={({ target }) =>
+          socket?.send(
+            JSON.stringify({
+              command: "focus",
+              block: blockId,
+              field: target.name,
+            })
+          )
+        }
+        onBlur={({ target }) =>
+          socket?.send(
+            JSON.stringify({
+              command: "blur",
+              block: blockId,
+              field: target.name,
+            })
+          )
+        }
+      >
+        <fieldset>
+          <legend>Блок 2</legend>
           <label htmlFor="birthday">День рождения</label>
-          <br />
           <input
             type="text"
             name="birthday"
@@ -62,10 +71,11 @@ const Block1: FC<{
             value={fields.birthday.value}
             placeholder="Введите день рождения"
             disabled={fields.birthday.blocked}
+            className={ubuntuNormal.className}
             onChange={({ target }) =>
               setFields((prevState) => {
                 const state = JSON.parse(JSON.stringify(prevState));
-                state.birthday.text = target.value;
+                state.birthday.value = target.value;
 
                 return state;
               })
@@ -73,7 +83,6 @@ const Block1: FC<{
           />
           <br />
           <label htmlFor="height">Рост</label>
-          <br />
           <input
             type="text"
             name="height"
@@ -81,18 +90,18 @@ const Block1: FC<{
             value={fields.height.value}
             placeholder="Введите рост"
             disabled={fields.height.blocked}
+            className={ubuntuNormal.className}
             onChange={({ target }) =>
               setFields((prevState) => {
                 const state = JSON.parse(JSON.stringify(prevState));
-                state.height.text = target.value;
+                state.height.value = target.value;
 
                 return state;
               })
             }
           />
-          <br />
-        </form>
-      </div>
+        </fieldset>
+      </form>
     </>
   );
 };

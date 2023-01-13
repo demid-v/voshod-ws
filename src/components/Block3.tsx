@@ -3,6 +3,10 @@ import { createPortal } from "react-dom";
 import { useSocket } from "../contexts/Socket";
 import { useSocketListener } from "../utils/hooks";
 import Button from "./Button";
+import { Ubuntu } from "@next/font/google";
+
+const ubuntuNormal = Ubuntu({ subsets: ["cyrillic-ext"], weight: "400" });
+const ubuntu = Ubuntu({ subsets: ["cyrillic-ext"], weight: "500" });
 
 const Block1: FC<{
   buttonsElement: Element | null;
@@ -27,35 +31,40 @@ const Block1: FC<{
     <>
       {buttonsElement &&
         createPortal(
-          <Button buttonName="Block 3" setIsBlockVisible={setIsVisible} />,
+          <Button
+            buttonName="Блок 3"
+            isBlockVisible={isVisible}
+            setIsBlockVisible={setIsVisible}
+          />,
           buttonsElement
         )}
-      <div style={{ display: isVisible ? "block" : "none" }}>
-        <h2>Block 3</h2>
-        <form
-          action=""
-          method="post"
-          onFocus={({ target }) =>
-            socket?.send(
-              JSON.stringify({
-                command: "focus",
-                block: blockId,
-                field: target.name,
-              })
-            )
-          }
-          onBlur={({ target }) =>
-            socket?.send(
-              JSON.stringify({
-                command: "blur",
-                block: blockId,
-                field: target.name,
-              })
-            )
-          }
-        >
+      <form
+        action=""
+        method="post"
+        style={{ display: isVisible ? "block" : "none" }}
+        className={ubuntu.className}
+        onFocus={({ target }) =>
+          socket?.send(
+            JSON.stringify({
+              command: "focus",
+              block: blockId,
+              field: target.name,
+            })
+          )
+        }
+        onBlur={({ target }) =>
+          socket?.send(
+            JSON.stringify({
+              command: "blur",
+              block: blockId,
+              field: target.name,
+            })
+          )
+        }
+      >
+        <fieldset>
+          <legend>Блок 3</legend>
           <label htmlFor="city">Город</label>
-          <br />
           <input
             type="text"
             name="city"
@@ -63,10 +72,11 @@ const Block1: FC<{
             value={fields.city.value}
             placeholder="Введите город"
             disabled={fields.city.blocked}
+            className={ubuntuNormal.className}
             onChange={({ target }) =>
               setFields((prevState) => {
                 const state = JSON.parse(JSON.stringify(prevState));
-                state.city.text = target.value;
+                state.city.value = target.value;
 
                 return state;
               })
@@ -74,7 +84,6 @@ const Block1: FC<{
           />
           <br />
           <label htmlFor="address">Улица</label>
-          <br />
           <input
             type="text"
             name="address"
@@ -82,10 +91,11 @@ const Block1: FC<{
             value={fields.address.value}
             placeholder="Введите улицу"
             disabled={fields.address.blocked}
+            className={ubuntuNormal.className}
             onChange={({ target }) =>
               setFields((prevState) => {
                 const state = JSON.parse(JSON.stringify(prevState));
-                state.address.text = target.value;
+                state.address.value = target.value;
 
                 return state;
               })
@@ -101,18 +111,18 @@ const Block1: FC<{
             value={fields.index.value}
             placeholder="Введите почтовый индекс"
             disabled={fields.index.blocked}
+            className={ubuntuNormal.className}
             onChange={({ target }) =>
               setFields((prevState) => {
                 const state = JSON.parse(JSON.stringify(prevState));
-                state.index.text = target.value;
+                state.index.value = target.value;
 
                 return state;
               })
             }
           />
-          <br />
-        </form>
-      </div>
+        </fieldset>
+      </form>
     </>
   );
 };
