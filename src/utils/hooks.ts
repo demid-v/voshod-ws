@@ -1,7 +1,7 @@
 import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
 import { useSocket } from "../contexts/Socket";
 
-function useSocketListener<T extends object>(
+function useSocketListener<T>(
   blockId: string,
   isVisible: boolean,
   setIsVisible: Dispatch<SetStateAction<boolean>>,
