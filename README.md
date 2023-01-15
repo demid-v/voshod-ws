@@ -1,6 +1,7 @@
 # voshod-ws
 
-Forms synchronized through websocket.
+Forms synchronized through websocket.<br/>
+Open project in two tabs/windows. Focusing on a field will make that field readonly in another tab/window.
 
 ![Landing page](/screenshots/landing-page.png)
 
