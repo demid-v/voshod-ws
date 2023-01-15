@@ -15,7 +15,6 @@ npm run up
 ```
 
 ### Start in development
-Installs and runs docker image of the full database. Takes a lot of time.
 ```sh
 npm run dev
 ```
